@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchUserAsync } from './actions/user.actions';
+import { UserActions } from './actions/user.actions';
 import './App.css';
 import { IUserState } from './reducers/user.reducer';
 import { IApplicationState } from './store/store';
@@ -19,7 +19,7 @@ const mapStateToProps = (state: IApplicationState) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    fetchUserAsync: () => dispatch(fetchUserAsync()),
+    fetchUserAsync: () => dispatch({ type: UserActions.USER_FETCH_REQUESTED, payload: 1 }),
   };
 };
 

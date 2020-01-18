@@ -1,11 +1,8 @@
 import { applyMiddleware, combineReducers, createStore, Store } from 'redux';
 import { createLogger } from 'redux-logger';
-import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
 import { IUserState, userReducer } from '../reducers/user.reducer';
-
-const logger = createLogger({
-    // ...options
-});
+import { rootSaga } from '../sagas/sagas';
 
 export interface IApplicationState {
     user: IUserState,
@@ -14,14 +11,18 @@ export interface IApplicationState {
 
 class StoreFactory {
     public init(): Store {
+        // Middlewares
+        const logger = createLogger({/** ...options */ });
+        const sagaMiddleware = createSagaMiddleware();
+
+        // Reducers
         const reducers = combineReducers({
             user: userReducer
         });
 
-        const storeInstance = createStore(reducers, {}, applyMiddleware(logger, thunk));
-        storeInstance.subscribe(
-            () => console.log('Store updated. New state:', storeInstance.getState())
-        );
+        // Store with sagas
+        const storeInstance = createStore(reducers, {}, applyMiddleware(logger, sagaMiddleware));
+        sagaMiddleware.run(rootSaga);
 
         return storeInstance;
     }
