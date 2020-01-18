@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { AnyAction } from 'redux';
 import { call, delay, put, takeLatest } from 'redux-saga/effects';
 import { UserActions } from './../actions/user.actions';
 
@@ -8,7 +9,7 @@ export function fetchFromApi(userId: number) {
 }
 
 // worker Saga: will be fired on USER_FETCH_REQUESTED actions
-function* fetchUser(action: any) {
+function* fetchUser(action: AnyAction) {
     yield put({ type: UserActions.USER_ACTION_START_FETCHING });
     yield delay(2000);
 

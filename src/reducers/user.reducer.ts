@@ -1,4 +1,4 @@
-import { Reducer } from 'redux';
+import { AnyAction, Reducer } from 'redux';
 import { UserActions } from '../actions/user.actions';
 import { IUser } from '../api/IUser';
 
@@ -14,7 +14,7 @@ const initialState: IUserState = {
     fetchError: false,
 }
 
-export const userReducer: Reducer = (oldState = initialState, action) => {
+export const userReducer: Reducer = (oldState = initialState, action: AnyAction) => {
     switch (action.type) {
         case UserActions.USER_ACTION_START_FETCHING:
             return Object.assign({}, oldState, { fetching: true });
