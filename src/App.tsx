@@ -14,7 +14,7 @@ interface IProps {
 
 const mapStateToProps = (state: IApplicationState) => {
   return {
-    userDataRequest: state.user
+    userDataRequest: state.userState
   }
 };
 

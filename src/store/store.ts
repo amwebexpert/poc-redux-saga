@@ -5,7 +5,7 @@ import { IUserState, userReducer } from '../reducers/user.reducer';
 import { rootSaga } from '../sagas/sagas';
 
 export interface IApplicationState {
-    user: IUserState,
+    userState: IUserState,
     localeCode: string;
 }
 
@@ -18,7 +18,7 @@ class StoreFactory {
 
         // Reducers
         const reducers = combineReducers({
-            user: userReducer,
+            userState: userReducer,
         });
 
         // Store with sagas
