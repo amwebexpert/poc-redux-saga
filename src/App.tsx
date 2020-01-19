@@ -1,5 +1,6 @@
 
 import React from 'react';
+import ReactJson from 'react-json-view';
 import { connect } from 'react-redux';
 import { UserActions } from './actions/user.actions';
 import './App.css';
@@ -51,12 +52,14 @@ class App extends React.Component<IProps> {
   }
 
   private renderUserDetail(): React.ReactFragment {
-    const user = JSON.stringify(this.props.userDataRequest.user);
+    const user = this.props.userDataRequest.user || {};
 
     return (
       <div className="App">
         <header className="App-header">
-          <p>User: {user}</p>
+          <div style={{ textAlign: "left", fontSize: '12pt' }}>
+            <ReactJson src={user} theme="monokai" />
+          </div>
         </header>
       </div>
     );
